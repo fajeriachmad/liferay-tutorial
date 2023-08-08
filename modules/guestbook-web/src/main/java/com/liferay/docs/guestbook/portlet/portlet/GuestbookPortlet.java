@@ -34,6 +34,7 @@ import org.osgi.service.component.annotations.Reference;
  */
 @Component(immediate = true, property = { "com.liferay.portlet.display-category=category.social",
 		"com.liferay.portlet.instanceable=false", "com.liferay.portlet.scopeable=true",
+		"com.liferay.portlet.header-portlet-css=/css/main.css",
 		"javax.portlet.display-name=Guestbook", "javax.portlet.expiration-cache=0",
 		"javax.portlet.name=" + GuestbookPortletKeys.GUESTBOOK, "javax.portlet.init-param.template-path=/",
 		"javax.portlet.init-param.view-template=/guestbookwebportlet/view.jsp",
@@ -105,6 +106,9 @@ public class GuestbookPortlet extends MVCPortlet {
 				guestbookId = guestbooks.get(0).getGuestbookId();
 			}
 			renderRequest.setAttribute("guestbookId", guestbookId);
+			
+			List<Entry> entries = _entryLocalService.getEntries(groupId, guestbookId);
+			renderRequest.setAttribute("entryList", entries);
 		} catch (Exception e) {
 			throw new PortletException(e);
 		}
