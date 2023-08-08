@@ -49,6 +49,5 @@
 			</tr>
 		</c:forEach>
 	</tbody>
-</table> 
- 
+</table>
 <!-- Content End -->
